@@ -23,11 +23,11 @@
    <center>
       <TableView fx:id="tabela" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="42.0" text="id" />
-          <TableColumn prefWidth="144.0" text="Nome" />
-            <TableColumn prefWidth="138.0" text="cnpj" />
-            <TableColumn prefWidth="102.0" text="telefone" />
-            <TableColumn prefWidth="158.0" text="email" />
+          <TableColumn fx:id="colunaId" prefWidth="42.0" text="id" />
+          <TableColumn fx:id="colunaNome" prefWidth="144.0" text="Nome" />
+            <TableColumn fx:id="colunaCnpj" prefWidth="138.0" text="cnpj" />
+            <TableColumn fx:id="colunaTelefone" prefWidth="102.0" text="telefone" />
+            <TableColumn fx:id="colunaEmail" prefWidth="158.0" text="email" />
         </columns>
       </TableView>
    </center>

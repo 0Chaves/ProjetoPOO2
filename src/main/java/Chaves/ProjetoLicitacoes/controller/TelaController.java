@@ -16,7 +16,13 @@ public class TelaController {
 	private Stage stage;
 	private Scene scene;
 	private VBox root;
+	
+    @FXML
+    private Button Listar_Itens;
 
+    @FXML
+    private Button Listar_fornecedores;
+    
     @FXML
     private Button trocarTela_InserirFornecedor;
 
@@ -50,5 +56,17 @@ public class TelaController {
     	}
    }
 
+    @FXML
+    void trocarTela_ListaFornecedores(ActionEvent event) {
+    	try {
+    		root = (VBox)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaListaFornecedores.fxml"));
+    		scene = new Scene(root);
+    		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		stage.setScene(scene);
+			stage.show();
+    	} catch (IOException e) {
+    	 	e.printStackTrace();
+    	}
+    }
     
 }

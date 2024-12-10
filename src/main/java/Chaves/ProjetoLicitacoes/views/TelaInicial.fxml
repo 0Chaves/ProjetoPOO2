@@ -3,10 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chaves.ProjetoLicitacoes.controller.TelaController">
    <children>
-      <Button fx:id="trocarTela_InserirFornecedor" layoutX="105.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_fornecedor" prefHeight="61.0" prefWidth="153.0" text="Inserir Fornecedor" />
-      <Button fx:id="trocarTela_InserirItem" layoutX="337.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_item" prefHeight="61.0" prefWidth="153.0" text="Inserir Item" />
+      <Button fx:id="trocarTela_InserirFornecedor" layoutX="106.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_fornecedor" prefHeight="61.0" prefWidth="153.0" text="Inserir Fornecedor" />
+      <Button fx:id="trocarTela_InserirItem" layoutX="335.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_item" prefHeight="61.0" prefWidth="153.0" text="Inserir Item" />
+      <Button layoutX="106.0" layoutY="230.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="153.0" text="Listar Fornecedores" />
+      <Button layoutX="335.0" layoutY="237.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="153.0" text="Listar Itens" />
    </children>
 </AnchorPane>

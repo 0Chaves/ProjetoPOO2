@@ -128,7 +128,7 @@ public class TelaListaItensController implements Initializable {
     @FXML
     void voltar(ActionEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("/TelaInicial.fxml"));
+            AnchorPane root = FXMLLoader.load(getClass().getResource("/TelaInicial.fxml"));
             scene = new Scene(root);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -197,4 +197,30 @@ public class TelaListaItensController implements Initializable {
             exibirErro("Erro ao abrir tela de edição", e.getMessage());
         }
     }
+
+    @FXML
+    void gerenciarQuantidade(ActionEvent event) {
+        Item selecionado = tabela.getSelectionModel().getSelectedItem();
+        if (selecionado == null) {
+            exibirAlerta("Selecione um item para gerenciar a quantidade");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GerenciarQuantidade.fxml"));
+            AnchorPane root = loader.load();
+            
+            GerenciarQuantidadeController controller = loader.getController();
+            controller.setItem(selecionado);
+            
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            exibirErro("Erro ao abrir tela de gerenciamento", e.getMessage());
+        }
+    }
+
 }

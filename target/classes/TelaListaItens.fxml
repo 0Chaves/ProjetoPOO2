@@ -44,6 +44,8 @@
             <Button fx:id="btnVoltar" onAction="#voltar" text="Voltar" />
             <Button fx:id="btnEditar" onAction="#editar" text="Editar" />
             <Button fx:id="btnDeletar" onAction="#deletar" text="Deletar" />
+            <Button fx:id="btnSolicitar" onAction="#gerenciarQuantidade" 
+                text="Gerenciar Quantidade" />
          </children>
       </HBox>
    </bottom>

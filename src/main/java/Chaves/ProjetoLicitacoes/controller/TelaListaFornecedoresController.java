@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -72,6 +73,31 @@ public class TelaListaFornecedoresController implements Initializable {
             tabela.setItems(lista_observavel);
         } catch (RuntimeException e) {
             exibirErro("Erro ao carregar fornecedores", e.getMessage());
+        }
+    }
+
+    @FXML
+    void editar(ActionEvent event) {
+        Fornecedor selecionado = tabela.getSelectionModel().getSelectedItem();
+        if (selecionado == null) {
+            exibirAlerta("Selecione um fornecedor para editar");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaEditarFornecedor.fxml"));
+            Parent root = loader.load();
+            
+            TelaEditarFornecedorController controller = loader.getController();
+            controller.setFornecedor(selecionado);
+            
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            exibirErro("Erro ao abrir tela de edição", e.getMessage());
         }
     }
 

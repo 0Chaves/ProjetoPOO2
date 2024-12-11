@@ -4,6 +4,7 @@ Chaves\ProjetoLicitacoes\dao\Interface_DAO.class
 Chaves\ProjetoLicitacoes\factory\ConnectionFactory.class
 Chaves\ProjetoLicitacoes\controller\TelaInserirItemController.class
 Chaves\ProjetoLicitacoes\dao\FornecedorDAO.class
+Chaves\ProjetoLicitacoes\controller\TelaEditarFornecedorController.class
 Chaves\ProjetoLicitacoes\controller\TelaFornecedorController.class
 Chaves\ProjetoLicitacoes\dao\ItemDAO.class
 Chaves\ProjetoLicitacoes\application\App.class

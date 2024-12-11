@@ -26,6 +26,9 @@ public class ItemDAO implements Interface_DAO<Item> {
     "FROM produtos p " +
     "INNER JOIN fornecedores f ON p.id_fornecedor = f.id " +
     "LIMIT ? OFFSET ?";
+    private final String UPDATE_QTD_QUERY = 
+        "UPDATE produtos SET qtd_solicitada = ? WHERE id = ? AND ? <= qtd_max";
+
     /**
      * Insere um novo item no banco de dados.
      *
@@ -40,7 +43,7 @@ public class ItemDAO implements Interface_DAO<Item> {
 			pstm.setString(2, item.getPregao());
 			pstm.setDouble(3, item.getValorUnitario());
 			pstm.setInt(4, item.getQuantidadeMaxima());
-			pstm.setInt(5, item.getQuantidadeMaxima()); // Initially, qtd_solicitada = qtd_max
+			pstm.setInt(5, 0); // Inicia com 0;
 			pstm.setInt(6, item.getFornecedor().getId());
 			pstm.execute();
 			return true;
@@ -159,5 +162,19 @@ public class ItemDAO implements Interface_DAO<Item> {
         
         Fornecedor fornecedor = new Fornecedor(idFornecedor, nome, cnpj, email, telefone);
         return new Item(id, descricao, pregao, quantidadeMaxima, quantidadeSolicitada, valorUnitario, fornecedor);
+    }
+
+    public boolean updateQuantidadeSolicitada(int itemId, int novaQuantidade) {    
+        try (Connection con = ConnectionFactory.getConnection();
+             PreparedStatement pstm = con.prepareStatement(UPDATE_QTD_QUERY)) {
+            pstm.setInt(1, novaQuantidade);
+            pstm.setInt(2, itemId);
+            pstm.setInt(3, novaQuantidade);
+            
+            int rowsAffected = pstm.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar quantidade solicitada", e);
+        }
     }
 }

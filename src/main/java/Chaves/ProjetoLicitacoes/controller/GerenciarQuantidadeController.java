@@ -78,7 +78,6 @@ public class GerenciarQuantidadeController {
     @FXML
     void voltar(ActionEvent event) {
         try {
-            // Change AnchorPane to BorderPane to match TelaListaItens.fxml
             BorderPane root = FXMLLoader.load(getClass().getResource("/TelaListaItens.fxml"));
             scene = new Scene(root);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

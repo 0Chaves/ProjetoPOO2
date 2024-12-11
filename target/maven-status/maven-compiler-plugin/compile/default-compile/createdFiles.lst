@@ -1,1 +1,14 @@
+Chaves\ProjetoLicitacoes\controller\TelaController.class
+Chaves\ProjetoLicitacoes\controller\TelaListaItensController.class
 Chaves\ProjetoLicitacoes\controller\TelaListaFornecedoresController.class
+Chaves\ProjetoLicitacoes\dao\Interface_DAO.class
+Chaves\ProjetoLicitacoes\factory\ConnectionFactory.class
+Chaves\ProjetoLicitacoes\controller\TelaEditarItemController.class
+Chaves\ProjetoLicitacoes\controller\TelaInserirItemController.class
+Chaves\ProjetoLicitacoes\dao\FornecedorDAO.class
+Chaves\ProjetoLicitacoes\controller\TelaEditarFornecedorController.class
+Chaves\ProjetoLicitacoes\controller\TelaFornecedorController.class
+Chaves\ProjetoLicitacoes\dao\ItemDAO.class
+Chaves\ProjetoLicitacoes\application\App.class
+Chaves\ProjetoLicitacoes\model\Item.class
+Chaves\ProjetoLicitacoes\model\Fornecedor.class

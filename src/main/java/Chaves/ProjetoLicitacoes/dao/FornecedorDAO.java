@@ -33,10 +33,10 @@ public class FornecedorDAO implements Interface_DAO<Fornecedor> {
 		if(fornecedor instanceof Fornecedor) {
 			try (Connection con = ConnectionFactory.getConnection();
 				PreparedStatement pstm = con.prepareStatement(INSERT_QUERY)) {
-				pstm.setString(1, fornecedor.getNome());
-				pstm.setString(2, fornecedor.getCnpj());
-				pstm.setString(4, fornecedor.getEmail());
-				pstm.setString(5, fornecedor.getTelefone());
+                pstm.setString(1, fornecedor.getNome());
+                pstm.setString(2, fornecedor.getCnpj());
+                pstm.setString(3, fornecedor.getEmail());
+                pstm.setString(4, fornecedor.getTelefone()); 
 				pstm.execute();
 				return true;
 			} catch (SQLException e) {

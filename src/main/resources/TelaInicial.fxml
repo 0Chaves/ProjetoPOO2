@@ -8,6 +8,9 @@
       <Button fx:id="trocarTela_InserirFornecedor" layoutX="106.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_fornecedor" prefHeight="61.0" prefWidth="153.0" text="Inserir Fornecedor" />
       <Button fx:id="trocarTela_InserirItem" layoutX="335.0" layoutY="108.0" mnemonicParsing="false" onAction="#trocar_tela_inserir_item" prefHeight="61.0" prefWidth="153.0" text="Inserir Item" />
       <Button fx:id="Listar_fornecedores" layoutX="106.0" layoutY="230.0" mnemonicParsing="false" onAction="#trocarTela_ListaFornecedores" prefHeight="61.0" prefWidth="153.0" text="Listar Fornecedores" />
-      <Button fx:id="Listar_Itens" layoutX="335.0" layoutY="237.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="153.0" text="Listar Itens" />
-   </children>
+      <Button fx:id="Listar_Itens" layoutX="335.0" layoutY="237.0" 
+            mnemonicParsing="false" 
+            onAction="#trocarTela_ListaItens"
+            prefHeight="61.0" prefWidth="153.0" 
+            text="Listar Itens" />   </children>
 </AnchorPane>

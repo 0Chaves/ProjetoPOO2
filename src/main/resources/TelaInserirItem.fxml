@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +15,7 @@
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="626.0" prefWidth="690.0">
          <children>
-            <Button blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="362.0" layoutY="346.0" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Enviar" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Button fx:id="botaoEnviar" blendMode="DIFFERENCE" cache="true" cacheHint="SCALE_AND_ROTATE" layoutX="362.0" layoutY="346.0" onAction="#enviar" opacity="0.39" prefHeight="32.0" prefWidth="64.0" text="Enviar" textOverrun="CENTER_WORD_ELLIPSIS">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -28,24 +29,25 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <TextArea layoutX="115.0" layoutY="249.0" prefHeight="18.0" prefWidth="200.0" promptText="Pregao">
+            <TextArea fx:id="inputPregao" layoutX="115.0" layoutY="249.0" prefHeight="18.0" prefWidth="200.0" promptText="Pregao">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextArea>
-            <TextArea layoutX="115.0" layoutY="200.0" prefHeight="18.0" prefWidth="200.0" promptText="Valor Unitario">
+            <TextArea fx:id="inputValorUnitario" layoutX="115.0" layoutY="200.0" prefHeight="18.0" prefWidth="200.0" promptText="Valor Unitario">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextArea>
-            <TextArea layoutX="115.0" layoutY="127.0" prefHeight="64.0" prefWidth="411.0" promptText="Descrição">
+            <TextArea fx:id="inputDescricao" layoutX="115.0" layoutY="127.0" prefHeight="64.0" prefWidth="411.0" promptText="Descrição">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextArea>
-            <TextArea layoutX="326.0" layoutY="200.0" prefHeight="18.0" prefWidth="200.0" promptText="Quantidade">
+            <TextArea fx:id="inputQuantidadeMaxima" layoutX="326.0" layoutY="200.0" prefHeight="18.0" prefWidth="200.0" promptText="Quantidade Maxima">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextArea>
-            <ChoiceBox fx:id="choice_fornecedores" layoutX="326.0" layoutY="248.0" prefHeight="38.0" prefWidth="200.0" />
+            <ChoiceBox fx:id="choiceFornecedor" layoutX="326.0" layoutY="248.0" prefHeight="38.0" prefWidth="200.0" />
+            <Label fx:id="labelMensagem" layoutX="115.0" layoutY="300.0" prefWidth="411.0" textFill="RED" />
          </children>
          <cursor>
             <Cursor fx:constant="W_RESIZE" />

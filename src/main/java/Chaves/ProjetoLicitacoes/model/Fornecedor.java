@@ -123,11 +123,15 @@ public class Fornecedor {
      * @param cnpj CNPJ do fornecedor.
      * @throws IllegalArgumentException Se o CNPJ for nulo ou vazio.
      */
-	private void setCnpj(String cnpj) {
-        if (cnpj == null || !CNPJ_PATTERN.matcher(cnpj).matches()) {
+    private void setCnpj(String cnpj) {
+        if (cnpj == null) {
+            throw new IllegalArgumentException("CNPJ não pode ser nulo");
+        }
+        String formattedCnpj = formatCnpj(cnpj);
+        if (!CNPJ_PATTERN.matcher(formattedCnpj).matches()) {
             throw new IllegalArgumentException("CNPJ inválido");
         }
-        this.cnpj = cnpj;
+        this.cnpj = formattedCnpj;
     }
 
 	/**
@@ -150,10 +154,17 @@ public class Fornecedor {
      * @throws IllegalArgumentException Se o telefone for nulo ou inválido.
      */
 	private void setTelefone(String telefone) {
-        if (telefone == null || !TELEFONE_PATTERN.matcher(telefone).matches()) {
+        if (telefone == null) {
+            throw new IllegalArgumentException("Telefone não pode ser nulo");
+        }
+
+        String formattedTelefone = formatTelefone(telefone);
+
+        if (!TELEFONE_PATTERN.matcher(formattedTelefone).matches()) {
             throw new IllegalArgumentException("Telefone inválido");
         }
-        this.telefone = telefone;
+        this.telefone = formattedTelefone;
+
     }
 
 	/**
@@ -165,6 +176,44 @@ public class Fornecedor {
 		this.id = id;
 	}
 
+    private String formatCnpj(String cnpj) {
+        // Remove tudo exceto dígitos
+        String nums = cnpj.replaceAll("\\D", "");
+        
+        if (nums.length() != 14) {
+            throw new IllegalArgumentException("CNPJ deve ter 14 dígitos");
+        }
+        
+        // Formata como XX.XXX.XXX/XXXX-XX
+        return String.format("%s.%s.%s/%s-%s",
+            nums.substring(0,2),
+            nums.substring(2,5),
+            nums.substring(5,8),
+            nums.substring(8,12),
+            nums.substring(12,14));
+    }
+
+    private String formatTelefone(String telefone) {
+        // Remove tudo exceto dígitos  
+        String nums = telefone.replaceAll("\\D", "");
+        
+        if (nums.length() != 10 && nums.length() != 11) {
+            throw new IllegalArgumentException("Telefone deve ter 10 ou 11 dígitos");
+        }
+        
+        // Formata como (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+        if (nums.length() == 11) {
+            return String.format("(%s) %s-%s",
+                nums.substring(0,2),
+                nums.substring(2,7),
+                nums.substring(7));
+        } else {
+            return String.format("(%s) %s-%s",
+                nums.substring(0,2),
+                nums.substring(2,6),
+                nums.substring(6));
+        }
+    }
 
 	@Override
 	public boolean equals(Object obj) {

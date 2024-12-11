@@ -1,7 +1,9 @@
 package Chaves.ProjetoLicitacoes.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Chaves.ProjetoLicitacoes.dao.FornecedorDAO;
 import Chaves.ProjetoLicitacoes.dao.ItemDAO;
@@ -15,20 +17,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class TelaInserirItemController implements Initializable {
+public class TelaEditarItemController implements Initializable {
+    
     private Stage stage;
     private Scene scene;
-    private AnchorPane root;
-
+    private BorderPane root;
+    
+    private Item item;
+    private ItemDAO itemDAO = new ItemDAO();
+    
     @FXML
     private TextArea inputDescricao;
     
@@ -45,64 +46,64 @@ public class TelaInserirItemController implements Initializable {
     private ChoiceBox<Fornecedor> choiceFornecedor;
     
     @FXML
-    private Button botao_voltar;
-    
-    @FXML
-    private Button botaoEnviar;
-    
-    @FXML
     private Label labelMensagem;
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         carregarFornecedores();
-        inputPregao.setPromptText("Pregão - Formato: XX/YYYY");
-        inputValorUnitario.setPromptText("Valor unitário");
-        inputQuantidadeMaxima.setPromptText("Quantidade Máxima");
     }
-
+    
     private void carregarFornecedores() {
         try {
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
-            List<Fornecedor> fornecedores = fornecedorDAO.list(100, 0); // Limit 100 fornecedores
+            List<Fornecedor> fornecedores = fornecedorDAO.list(100, 0);
             ObservableList<Fornecedor> observableFornecedores = FXCollections.observableArrayList(fornecedores);
             choiceFornecedor.setItems(observableFornecedores);
         } catch (Exception e) {
-            System.err.println("Erro ao carregar fornecedores: " + e.getMessage());
+            labelMensagem.setText("Erro ao carregar fornecedores: " + e.getMessage());
+        }
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+        preencherCampos();
+    }
+
+    private void preencherCampos() {
+        if (item != null) {
+            inputDescricao.setText(item.getDescricao());
+            inputPregao.setText(item.getPregao());
+            inputValorUnitario.setText(String.valueOf(item.getValorUnitario()));
+            inputQuantidadeMaxima.setText(String.valueOf(item.getQuantidadeMaxima()));
+            choiceFornecedor.setValue(item.getFornecedor());
         }
     }
 
     private boolean validateInputs() {
         try {
-            // Clear previous error message
             labelMensagem.setText("");
 
-            // Required fields check
             if (inputDescricao.getText().trim().isEmpty()) {
                 throw new IllegalArgumentException("Descrição não pode estar vazia");
             }
 
-            // Pregao format check: XX/YYYY
             String pregao = inputPregao.getText().trim();
             if (!pregao.matches("\\d{2}/\\d{4}")) {
                 throw new IllegalArgumentException("Pregão deve estar no formato XX/YYYY");
             }
 
-            // Valor unitário check
             String valorStr = inputValorUnitario.getText().trim().replace(",", ".");
             double valor = Double.parseDouble(valorStr);
             if (valor <= 0) {
                 throw new IllegalArgumentException("Valor unitário deve ser maior que zero");
             }
 
-            // Quantidade check
             String qtdStr = inputQuantidadeMaxima.getText().trim();
             int qtd = Integer.parseInt(qtdStr);
             if (qtd <= 0) {
                 throw new IllegalArgumentException("Quantidade máxima deve ser maior que zero");
             }
 
-            // Fornecedor check
             if (choiceFornecedor.getValue() == null) {
                 throw new IllegalArgumentException("Selecione um fornecedor");
             }
@@ -119,7 +120,7 @@ public class TelaInserirItemController implements Initializable {
     }
 
     @FXML
-    void enviar(ActionEvent event) {
+    void salvar(ActionEvent event) {
         try {
             if (!validateInputs()) {
                 return;
@@ -128,47 +129,37 @@ public class TelaInserirItemController implements Initializable {
             double valorUnitario = Double.parseDouble(inputValorUnitario.getText().trim().replace(",", "."));
             int quantidadeMaxima = Integer.parseInt(inputQuantidadeMaxima.getText().trim());
 
-            Item novoItem = new Item(
+            Item itemAtualizado = new Item(
+                item.getId(),
                 inputDescricao.getText().trim(),
                 inputPregao.getText().trim(),
                 quantidadeMaxima,
-                quantidadeMaxima, // Initial qtd_solicitada equals qtd_maxima
+                item.getQuantidadeSolicitada(),
                 valorUnitario,
                 choiceFornecedor.getValue()
             );
 
-            ItemDAO itemDAO = new ItemDAO();
-            if (itemDAO.insert(novoItem)) {
-                limparCampos();
+            if (itemDAO.update(itemAtualizado)) {
                 voltar(event);
             } else {
-                labelMensagem.setText("Erro ao inserir item no banco de dados");
+                labelMensagem.setText("Erro ao atualizar item");
             }
-
         } catch (Exception e) {
-            labelMensagem.setText("Erro inesperado: " + e.getMessage());
-            e.printStackTrace();
+            labelMensagem.setText("Erro ao atualizar item: " + e.getMessage());
         }
-    }
-
-    private void limparCampos() {
-        inputDescricao.clear();
-        inputPregao.clear();
-        inputValorUnitario.clear();
-        inputQuantidadeMaxima.clear();
-        choiceFornecedor.setValue(null);
     }
 
     @FXML
     void voltar(ActionEvent event) {
         try {
-            root = (AnchorPane)FXMLLoader.load(getClass().getResource("/TelaInicial.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/TelaListaItens.fxml"));
             scene = new Scene(root);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            labelMensagem.setText("Erro ao voltar: " + e.getMessage());
         }
     }
 }

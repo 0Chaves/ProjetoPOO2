@@ -17,8 +17,8 @@ import Chaves.ProjetoLicitacoes.model.Item;
  */
 public class ItemDAO implements Interface_DAO<Item> {
 
-    private static final String INSERT_QUERY = "INSERT INTO produtos (descricao, valor_unitario, id_fornecedor) VALUES (?,?,?)";
-    private static final String DELETE_QUERY = "DELETE FROM produtos WHERE id = ?";
+	private static final String INSERT_QUERY = "INSERT INTO produtos (descricao, pregao, valor_unitario, qtd_max, qtd_solicitada, id_fornecedor) VALUES (?,?,?,?,?,?)";
+	private static final String DELETE_QUERY = "DELETE FROM produtos WHERE id = ?";
     private static final String UPDATE_QUERY = "UPDATE produtos SET descricao = ?, valor_unitario = ?, id_fornecedor = ? WHERE id = ?";
     private static final String SELECT_QUERY = "SELECT * FROM produtos p INNER JOIN fornecedores f ON p.id_fornecedor = f.id WHERE id = ?";
     private static final String LIST_QUERY = "SELECT * FROM produtos p INNER JOIN fornecedores f ON p.id_fornecedor = f.id LIMIT ? OFFSET ?";
@@ -31,17 +31,20 @@ public class ItemDAO implements Interface_DAO<Item> {
      */
     @Override
     public boolean insert(Item item) {
-        try (Connection con = ConnectionFactory.getConnection();
-             PreparedStatement pstm = con.prepareStatement(INSERT_QUERY)) {
-            pstm.setString(1, item.getDescricao());
-            pstm.setDouble(2, item.getValorUnitario());
-            pstm.setInt(3, item.getFornecedor().getId());
-            pstm.execute();
-            return true;
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao inserir item", e);
-        }
-    }
+		try (Connection con = ConnectionFactory.getConnection();
+			 PreparedStatement pstm = con.prepareStatement(INSERT_QUERY)) {
+			pstm.setString(1, item.getDescricao());
+			pstm.setString(2, item.getPregao());
+			pstm.setDouble(3, item.getValorUnitario());
+			pstm.setInt(4, item.getQuantidadeMaxima());
+			pstm.setInt(5, item.getQuantidadeMaxima()); // Initially, qtd_solicitada = qtd_max
+			pstm.setInt(6, item.getFornecedor().getId());
+			pstm.execute();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao inserir item", e);
+		}
+	}
 
     /**
      * Exclui um item do banco de dados pelo ID.

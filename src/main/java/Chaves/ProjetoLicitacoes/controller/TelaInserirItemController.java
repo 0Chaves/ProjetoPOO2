@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.ChoiceBox;
 
 public class TelaInserirItemController {
 	private Stage stage;
@@ -24,7 +23,7 @@ public class TelaInserirItemController {
     @FXML
     void voltar(ActionEvent event) {
     	try {
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaInicial.fxml"));
+			root = (AnchorPane)FXMLLoader.load(getClass().getResource("/TelaInicial.fxml"));
 			scene = new Scene(root);
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(scene);

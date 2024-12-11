@@ -10,12 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.input.KeyEvent;
 
 public class TelaFornecedorController {
 
@@ -44,7 +41,7 @@ public class TelaFornecedorController {
     @FXML
     void voltar(ActionEvent event) {
     	try {
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaInicial.fxml"));
+			root = (AnchorPane)FXMLLoader.load(getClass().getResource("/TelaInicial.fxml"));
 			scene = new Scene(root);
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(scene);

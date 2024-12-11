@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -32,7 +31,7 @@ public class TelaController {
     @FXML
     void trocar_tela_inserir_fornecedor(ActionEvent event) {
     	try {
-			root = (VBox)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaInserirFornecedor.fxml"));
+			root = (VBox)FXMLLoader.load(getClass().getResource("/TelaInserirFornecedor.fxml"));
 			scene = new Scene(root);
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(scene);
@@ -46,7 +45,7 @@ public class TelaController {
     @FXML
     void trocar_tela_inserir_item(ActionEvent event) {
     	try {
-    		root = (VBox)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaInserirItem.fxml"));
+    		root = (VBox)FXMLLoader.load(getClass().getResource("/TelaInserirItem.fxml"));
     		scene = new Scene(root);
     		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     		stage.setScene(scene);
@@ -59,7 +58,7 @@ public class TelaController {
     @FXML
     void trocarTela_ListaFornecedores(ActionEvent event) {
     	try {
-    		root = (VBox)FXMLLoader.load(getClass().getResource("/Chaves/ProjetoLicitacoes/views/TelaListaFornecedores.fxml"));
+    		root = (VBox)FXMLLoader.load(getClass().getResource("/TelaListaFornecedores.fxml"));
     		scene = new Scene(root);
     		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     		stage.setScene(scene);

@@ -56,10 +56,9 @@ public class TelaInserirItemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         carregarFornecedores();
-        // Add tooltips for input format guidance
-        inputPregao.setPromptText("Formato: XX/YYYY");
-        inputValorUnitario.setPromptText("Exemplo: 10.50");
-        inputQuantidadeMaxima.setPromptText("Número inteiro positivo");
+        inputPregao.setPromptText("Pregão - Formato: XX/YYYY");
+        inputValorUnitario.setPromptText("Valor unitário");
+        inputQuantidadeMaxima.setPromptText("Quantidade Máxima");
     }
 
     private void carregarFornecedores() {

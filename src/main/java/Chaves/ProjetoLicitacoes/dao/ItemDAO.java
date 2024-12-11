@@ -21,8 +21,11 @@ public class ItemDAO implements Interface_DAO<Item> {
 	private static final String DELETE_QUERY = "DELETE FROM produtos WHERE id = ?";
     private static final String UPDATE_QUERY = "UPDATE produtos SET descricao = ?, valor_unitario = ?, id_fornecedor = ? WHERE id = ?";
     private static final String SELECT_QUERY = "SELECT * FROM produtos p INNER JOIN fornecedores f ON p.id_fornecedor = f.id WHERE id = ?";
-    private static final String LIST_QUERY = "SELECT * FROM produtos p INNER JOIN fornecedores f ON p.id_fornecedor = f.id LIMIT ? OFFSET ?";
-
+    private static final String LIST_QUERY = 
+    "SELECT p.*, f.nome, f.cnpj, f.email, f.telefone " +
+    "FROM produtos p " +
+    "INNER JOIN fornecedores f ON p.id_fornecedor = f.id " +
+    "LIMIT ? OFFSET ?";
     /**
      * Insere um novo item no banco de dados.
      *
@@ -143,14 +146,17 @@ public class ItemDAO implements Interface_DAO<Item> {
         int id = resultSet.getInt("id");
         String descricao = resultSet.getString("descricao");
         String pregao = resultSet.getString("pregao");
-        int quantidadeMaxima = resultSet.getInt("quantidade_maxima");
-        int quantidadeSolicitada = resultSet.getInt("quantidade_solicitada");
+        int quantidadeMaxima = resultSet.getInt("qtd_max");  // Corrigido
+        int quantidadeSolicitada = resultSet.getInt("qtd_solicitada"); // Corrigido
         double valorUnitario = resultSet.getDouble("valor_unitario");
         int idFornecedor = resultSet.getInt("id_fornecedor");
+        
+        // Dados do fornecedor
         String nome = resultSet.getString("nome");
         String cnpj = resultSet.getString("cnpj");
         String email = resultSet.getString("email");
         String telefone = resultSet.getString("telefone");
+        
         Fornecedor fornecedor = new Fornecedor(idFornecedor, nome, cnpj, email, telefone);
         return new Item(id, descricao, pregao, quantidadeMaxima, quantidadeSolicitada, valorUnitario, fornecedor);
     }

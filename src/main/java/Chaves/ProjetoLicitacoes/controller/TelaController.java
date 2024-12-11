@@ -75,5 +75,22 @@ public class TelaController {
 			alert.showAndWait();
 		}
 	}
+	@FXML
+	void trocarTela_ListaItens(ActionEvent event) {
+		try {
+			BorderPane root = FXMLLoader.load(getClass().getResource("/TelaListaItens.fxml"));
+			scene = new Scene(root);
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro");
+			alert.setHeaderText("Erro ao carregar tela");
+			alert.setContentText("Não foi possível carregar a tela de listagem de itens.");
+			alert.showAndWait();
+		}
+	}
     
 }

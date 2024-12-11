@@ -27,6 +27,7 @@ public class TelaListaFornecedoresController implements Initializable {
     
     private Stage stage;
     private Scene scene;
+    @SuppressWarnings("unused")
     private BorderPane root;
     
     private FornecedorDAO fornecedorDAO = new FornecedorDAO();

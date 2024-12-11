@@ -97,7 +97,6 @@ public class ItemDAO implements Interface_DAO<Item> {
 				String descricao = result.getString("descricao");
 				double valor_unitario = result.getDouble("valor_unitario");
 				int id_fornecedor = result.getInt("id_fornecedor");
-				//TODO: Select com join para trazer o fornecedor e a categoria
 //				Item item = new Item(id_item, descricao, valor_unitario, null, null);
 //				return item;
 			}
